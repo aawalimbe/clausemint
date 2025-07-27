@@ -1,8 +1,8 @@
-# Clausemint - Legal SaaS MVP
+# Clausemint.com - Legal SaaS MVP
 
 ## Overview
 
-This repository contains the source code and architectural specifications for **Clausemint**, a Legal SaaS MVP. The application is designed to generate legal documents, review uploaded contracts, and provide AI-powered clause analysis using system prompts and modular logic.
+This repository contains the source code and architectural specifications for **Clausemint.com**, a Legal SaaS MVP. The application is designed to generate legal documents, review uploaded contracts, and provide AI-powered clause analysis using system prompts and modular logic.
 
 ### Core Features
 - **NDA Generation Tool** - Generate one-way, two-way, or three-way NDA contracts
@@ -50,6 +50,18 @@ clausemint/
 ```
 
 ---
+
+## Dark color pallete
+Background: Marshland #040504
+Lines, borders, seperators, Title Text: Ocean Green #44b28b
+Input text, text, Mercury #e7e7e7
+Inactive text, tip: Boulder #7c7c7c
+
+## Light color pallete
+Background: Aqua Squeeze: #e3f2f0
+Lines, borders, seperators, Title Text:Keppel #3eb48c
+Input text, text: Nandor #555e5b
+Inactive text, tip: Silver Chalice #a4a4a4
 
 ## Features Breakdown
 

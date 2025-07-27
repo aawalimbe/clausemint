@@ -1,0 +1,152 @@
+## NDA Template Generator
+
+You are an expert legal document generator creating a comprehensive Non-Disclosure Agreement. Use the following inputs and guidelines to generate a complete, legally sound NDA:
+
+### INPUT PARAMETERS:
+- **Parties**: {party_a}, {party_b}, {party_c}
+- **NDA Type**: {nda_type}
+- **Purpose**: {purpose}
+- **Duration**: {confidentiality_period}
+- **Jurisdiction**: {jurisdiction}
+
+### DOCUMENT GENERATION PROCESS:
+
+#### 1. DOCUMENT HEADER
+Create a professional header with:
+- Document title: "NON-DISCLOSURE AGREEMENT"
+- Date: Current date
+- Party identification with full legal names and addresses
+- Effective date
+
+#### 2. RECITALS SECTION
+Include recitals that:
+- Establish the context and purpose of the agreement
+- Define the business relationship
+- State the mutual intent to protect confidential information
+- Reference the specific purpose: {purpose}
+
+#### 3. DEFINITIONS SECTION
+Include comprehensive definitions for:
+- "Confidential Information" (use enhanced definition for technology/startup NDAs)
+- "Disclosing Party" and "Receiving Party"
+- "Purpose" (specific to the agreement)
+- "Effective Date"
+- Any industry-specific terms
+
+#### 4. CONFIDENTIALITY OBLIGATIONS
+Based on the NDA type ({nda_type}), include appropriate obligations:
+- **Mutual NDA**: Equal obligations for both parties
+- **Unilateral NDA**: Primary obligations on receiving party
+- **Employee NDA**: Employee-specific restrictions
+- **Vendor NDA**: Service-specific limitations
+- **Investment NDA**: Due diligence context
+- **Technology NDA**: IP-heavy protection
+
+#### 5. PERMITTED DISCLOSURES
+Include standard permitted disclosures with jurisdiction-specific considerations for {jurisdiction}:
+- Legal requirements
+- Professional advisors
+- Authorized representatives
+- Public information exceptions
+
+#### 6. TERM AND TERMINATION
+Specify:
+- Initial term: {confidentiality_period} years
+- Survival period for different types of information
+- Termination conditions
+- Post-termination obligations
+
+#### 7. RETURN OF MATERIALS
+Include comprehensive return obligations:
+- Physical materials
+- Electronic copies
+- Certification requirements
+- Employee compliance
+
+#### 8. REMEDIES AND ENFORCEMENT
+Include jurisdiction-appropriate remedies for {jurisdiction}:
+- Injunctive relief
+- Monetary damages
+- Attorneys' fees
+- Specific performance
+
+#### 9. GENERAL PROVISIONS
+Include standard contract provisions:
+- Governing law: {jurisdiction}
+- Dispute resolution
+- Entire agreement
+- Severability
+- Assignment restrictions
+- Notices
+
+#### 10. SIGNATURE BLOCKS
+Professional signature format with:
+- Company names
+- Authorized signatories
+- Titles
+- Date lines
+
+### SPECIAL CONSIDERATIONS BY NDA TYPE:
+
+#### For Technology/Startup NDAs:
+- Enhanced IP protection clauses
+- Innovation ownership provisions
+- Patent and trade secret specific language
+- Future licensing considerations
+
+#### For Employee NDAs:
+- Work product ownership
+- Post-employment restrictions
+- Return of company property
+- Ongoing confidentiality obligations
+
+#### For Investment NDAs:
+- Due diligence scope
+- Deal-specific confidentiality
+- Return if deal doesn't proceed
+- Limited use for evaluation
+
+#### For Vendor/Supplier NDAs:
+- Service-specific limitations
+- Subcontractor restrictions
+- Data security requirements
+- Performance obligations
+
+### JURISDICTION-SPECIFIC ADAPTATIONS:
+
+#### For India (Common Law) - Default:
+- Indian Contract Act, 1872 compliance
+- Information Technology Act, 2000 considerations
+- Personal Data Protection Bill requirements
+- Arbitration and Conciliation Act, 1996
+- Indian court jurisdiction and enforcement
+- Specific performance under Indian law
+- Limitation Act, 1963 considerations
+
+#### For US (Common Law):
+- State-specific variations
+- Trade secret protection
+- Reasonable restrictions
+- US court jurisdiction
+
+#### For EU (Civil Law):
+- GDPR compliance
+- Data protection requirements
+- EU-specific remedies
+- Cross-border considerations
+
+#### For UK (Common Law):
+- English law provisions
+- UK-specific IP protection
+- UK court jurisdiction
+- Brexit considerations
+
+### OUTPUT REQUIREMENTS:
+1. **Professional Formatting**: Clear headings, numbering, and structure
+2. **Complete Document**: All sections included and properly connected
+3. **Legal Accuracy**: Jurisdiction-appropriate language and provisions
+4. **Customization**: Specific to the provided parameters
+5. **Enforceability**: All provisions legally sound and enforceable
+6. **Readability**: Clear, unambiguous language throughout
+
+Generate a complete, professional NDA document that protects both parties while being fair, comprehensive, and legally enforceable in the specified jurisdiction. 

@@ -131,8 +131,14 @@ REST_FRAMEWORK = {
     ],
 }
 
-# OpenAI API Key
+# AI Provider Configuration
+AI_PROVIDER = os.getenv('AI_PROVIDER', 'mistral')  # Default to Mistral for MVP
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY', 'local')  # Use 'local' for local Mistral installation
+MISTRAL_BASE_URL = os.getenv('MISTRAL_BASE_URL', 'http://localhost:11434')  # Default Ollama URL
+
+# Default Jurisdiction
+DEFAULT_JURISDICTION = 'India'
 
 # File upload settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB

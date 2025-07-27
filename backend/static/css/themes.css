@@ -1,0 +1,508 @@
+/* ========================================
+   CLAUSEMINT THEME SYSTEM
+   ======================================== */
+
+/* CSS Custom Properties for Theme Switching */
+:root {
+    /* Dark Theme (Default) */
+    --bg-primary: #040504;      /* Marshland */
+    --bg-secondary: #0a0a0a;    /* Slightly lighter dark */
+    --bg-tertiary: #111111;     /* Card backgrounds */
+    --bg-elevated: #1a1a1a;     /* Elevated elements */
+    
+    --text-primary: #e7e7e7;    /* Mercury - Input text, text */
+    --text-secondary: #7c7c7c;  /* Boulder - Inactive text, tip */
+    --text-muted: #999999;      /* Slightly lighter muted text */
+    
+    --accent-primary: #44b28b;  /* Ocean Green - Lines, borders, separators, Title Text */
+    --accent-secondary: #3eb48c; /* Keppel - Alternative accent */
+    --accent-hover: #5ac4a0;    /* Lighter accent for hover */
+    
+    --border-primary: #44b28b;  /* Ocean Green - Lines, borders, separators */
+    --border-secondary: #2a2a2a; /* Subtle borders */
+    --border-muted: #333333;    /* Muted borders */
+    
+    --success-color: #28a745;   /* Green for success states */
+    --warning-color: #ffc107;   /* Amber for warnings */
+    --error-color: #dc3545;     /* Red for errors */
+    --info-color: #17a2b8;      /* Blue for info */
+    
+    /* RAG Colors */
+    --rag-red: #dc3545;         /* Red for high risk */
+    --rag-amber: #ffc107;       /* Amber for review needed */
+    --rag-green: #28a745;       /* Green for acceptable */
+    
+    /* Shadows */
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.5);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-normal: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease-in-out;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --bg-primary: #e3f2f0;      /* Aqua Squeeze */
+    --bg-secondary: #f0f8f7;    /* Slightly darker light */
+    --bg-tertiary: #ffffff;     /* Card backgrounds */
+    --bg-elevated: #f8f9fa;     /* Elevated elements */
+    
+    --text-primary: #555e5b;    /* Nandor - Input text, text */
+    --text-secondary: #a4a4a4;  /* Silver Chalice - Inactive text, tip */
+    --text-muted: #6c757d;      /* Slightly darker muted text */
+    
+    --accent-primary: #3eb48c;  /* Keppel - Lines, borders, separators, Title Text */
+    --accent-secondary: #44b28b; /* Ocean Green - Alternative accent */
+    --accent-hover: #2d8a6f;    /* Darker accent for hover */
+    
+    --border-primary: #3eb48c;  /* Keppel - Lines, borders, separators */
+    --border-secondary: #dee2e6; /* Subtle borders */
+    --border-muted: #e9ecef;    /* Muted borders */
+    
+    --success-color: #28a745;   /* Green for success states */
+    --warning-color: #ffc107;   /* Amber for warnings */
+    --error-color: #dc3545;     /* Red for errors */
+    --info-color: #17a2b8;      /* Blue for info */
+    
+    /* RAG Colors (same for both themes) */
+    --rag-red: #dc3545;         /* Red for high risk */
+    --rag-amber: #ffc107;       /* Amber for review needed */
+    --rag-green: #28a745;       /* Green for acceptable */
+    
+    /* Shadows */
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+    transition: background-color var(--transition-normal), 
+                color var(--transition-normal), 
+                border-color var(--transition-normal);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* ========================================
+   LAYOUT COMPONENTS
+   ======================================== */
+
+.container-fluid {
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-medium);
+}
+
+.main-content {
+    background-color: var(--bg-primary);
+}
+
+/* ========================================
+   NAVIGATION & HEADERS
+   ======================================== */
+
+.navbar {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-light);
+}
+
+.navbar-brand {
+    color: var(--accent-primary) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-primary) !important;
+    transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: var(--accent-primary) !important;
+}
+
+.nav-link.active {
+    color: var(--accent-primary) !important;
+    background-color: var(--bg-tertiary);
+    border-left: 3px solid var(--accent-primary);
+}
+
+/* ========================================
+   CARDS & CONTAINERS
+   ======================================== */
+
+.card {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    transition: box-shadow var(--transition-normal);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-medium);
+}
+
+.card-header {
+    background-color: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.card-body {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* ========================================
+   FORMS & INPUTS
+   ======================================== */
+
+.form-control {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+    background-color: var(--bg-secondary);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(68, 178, 139, 0.25);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+}
+
+.form-label {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.form-select {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+}
+
+.form-select:focus {
+    background-color: var(--bg-secondary);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 0.2rem rgba(68, 178, 139, 0.25);
+    color: var(--text-primary);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn-primary {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+    transition: all var(--transition-fast);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-secondary {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-elevated);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.btn-outline-primary {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+/* ========================================
+   TEXT & TYPOGRAPHY
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.text-primary {
+    color: var(--accent-primary) !important;
+}
+
+/* ========================================
+   RAG COLORS
+   ======================================== */
+
+.rag-red {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid var(--rag-red);
+    color: var(--rag-red);
+}
+
+.rag-amber {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid var(--rag-amber);
+    color: var(--rag-amber);
+}
+
+.rag-green {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid var(--rag-green);
+    color: var(--rag-green);
+}
+
+/* ========================================
+   MODALS
+   ======================================== */
+
+.modal-content {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    box-shadow: var(--shadow-heavy);
+}
+
+.modal-header {
+    background-color: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-secondary);
+}
+
+.modal-title {
+    color: var(--accent-primary);
+}
+
+.modal-body {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.modal-footer {
+    background-color: var(--bg-elevated);
+    border-top: 1px solid var(--border-secondary);
+}
+
+/* ========================================
+   CHAT & MESSAGES
+   ======================================== */
+
+.chat-container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+}
+
+.message {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.message.user {
+    background-color: var(--accent-primary);
+    color: white;
+    margin-left: 2rem;
+}
+
+.message.assistant {
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
+    margin-right: 2rem;
+}
+
+/* ========================================
+   LOADING & ANIMATIONS
+   ======================================== */
+
+.loading-spinner {
+    color: var(--accent-primary);
+}
+
+.progress {
+    background-color: var(--bg-secondary);
+}
+
+.progress-bar {
+    background-color: var(--accent-primary);
+}
+
+/* ========================================
+   THEME SWITCHER
+   ======================================== */
+
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-primary);
+    border-radius: 50px;
+    padding: 8px;
+    box-shadow: var(--shadow-medium);
+    transition: all var(--transition-normal);
+}
+
+.theme-switcher:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-heavy);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--accent-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.theme-toggle:hover {
+    background-color: var(--bg-elevated);
+    transform: rotate(180deg);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.bg-primary {
+    background-color: var(--bg-primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary) !important;
+}
+
+.bg-tertiary {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.border-primary {
+    border-color: var(--border-primary) !important;
+}
+
+.border-secondary {
+    border-color: var(--border-secondary) !important;
+}
+
+.text-primary {
+    color: var(--text-primary) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .theme-switcher {
+        top: 10px;
+        right: 10px;
+        padding: 6px;
+    }
+    
+    .theme-toggle {
+        font-size: 1rem;
+        padding: 6px;
+    }
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+}
+
+/* ========================================
+   FOCUS STATES
+   ======================================== */
+
+*:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    :root {
+        --bg-primary: white;
+        --bg-secondary: #f8f9fa;
+        --text-primary: black;
+        --text-secondary: #6c757d;
+        --accent-primary: #3eb48c;
+        --border-primary: #dee2e6;
+    }
+    
+    .theme-switcher {
+        display: none;
+    }
+} 

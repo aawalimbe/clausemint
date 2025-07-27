@@ -1,6 +1,8 @@
 // Global variables
 let currentDocument = null;
 let currentDocumentId = null;
+let currentAIProvider = 'mistral'; // Default to Mistral
+let currentNDAParams = null; // Store NDA parameters for export
 
 // DOM elements
 const navItems = document.querySelectorAll('.nav-item');
@@ -212,6 +214,48 @@ function createClauseAnalysisElement(clause, index) {
     return div;
 }
 
+// Legal-themed loading messages for streaming
+const legalLoadingMessages = [
+    {
+        icon: 'fas fa-balance-scale',
+        message: 'Analyzing legal requirements...',
+        progress: 10
+    },
+    {
+        icon: 'fas fa-gavel',
+        message: 'Crafting confidentiality clauses...',
+        progress: 25
+    },
+    {
+        icon: 'fas fa-shield-alt',
+        message: 'Implementing security measures...',
+        progress: 40
+    },
+    {
+        icon: 'fas fa-file-contract',
+        message: 'Drafting legal provisions...',
+        progress: 60
+    },
+    {
+        icon: 'fas fa-handshake',
+        message: 'Balancing party interests...',
+        progress: 80
+    },
+    {
+        icon: 'fas fa-stream',
+        message: 'AI is streaming your document in real-time...',
+        progress: 90
+    },
+    {
+        icon: 'fas fa-check-circle',
+        message: 'Finalizing document structure...',
+        progress: 95
+    }
+];
+
+let currentMessageIndex = 0;
+let messageInterval;
+
 // NDA form submission
 ndaForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -227,10 +271,18 @@ ndaForm.addEventListener('submit', async (e) => {
         jurisdiction: formData.get('jurisdiction')
     };
     
-    showLoading(true);
+    // Validate required fields
+    if (!ndaData.party_a || !ndaData.party_b || !ndaData.purpose) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
+    }
+    
+    // Show NDA loading modal
+    showNDALoadingModal();
     
     try {
-        const response = await fetch('/api/nda/generate/', {
+        // Use streaming endpoint for real-time generation
+        const response = await fetch('/api/nda/generate/streaming/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -238,27 +290,81 @@ ndaForm.addEventListener('submit', async (e) => {
             body: JSON.stringify(ndaData)
         });
         
-        const data = await response.json();
-        
-        if (response.ok) {
-            displayNdaResult(data.nda_content);
-            showNotification('NDA generated successfully', 'success');
-        } else {
-            showNotification(data.error || 'Generation failed', 'error');
+        if (!response.ok) {
+            const errorData = await response.json();
+            updateLoadingMessage('fas fa-exclamation-triangle', 'Failed to generate document', 0, 'error');
+            setTimeout(() => {
+                hideNDALoadingModal();
+                showNotification(errorData.error || 'Failed to generate NDA', 'error');
+            }, 2000);
+            return;
         }
+        
+        // Handle streaming response
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        
+        while (true) {
+            const { done, value } = await reader.read();
+            
+            if (done) break;
+            
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop(); // Keep incomplete line in buffer
+            
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    try {
+                        const data = JSON.parse(line.slice(6));
+                        
+                        if (data.status === 'started') {
+                            updateLoadingMessage('fas fa-cogs', 'AI is generating your document...', 50);
+                        } else if (data.status === 'completed') {
+                            updateLoadingMessage('fas fa-check-circle', 'Document crafted successfully!', 100, 'success');
+                            
+                            setTimeout(() => {
+                                hideNDALoadingModal();
+                                displayNdaResult(data.content, data.parameters);
+                                showNotification('🎉 Your NDA has been expertly crafted and is ready for review!', 'success');
+                            }, 1500);
+                            return;
+                        } else if (data.status === 'error') {
+                            updateLoadingMessage('fas fa-exclamation-triangle', 'Generation failed', 0, 'error');
+                            setTimeout(() => {
+                                hideNDALoadingModal();
+                                showNotification(data.error || 'Failed to generate NDA', 'error');
+                            }, 2000);
+                            return;
+                        }
+                    } catch (e) {
+                        console.error('Error parsing streaming data:', e);
+                    }
+                }
+            }
+        }
+        
     } catch (error) {
         console.error('NDA generation error:', error);
-        showNotification('Generation failed. Please try again.', 'error');
-    } finally {
-        showLoading(false);
+        updateLoadingMessage('fas fa-exclamation-triangle', 'Connection error occurred', 0, 'error');
+        setTimeout(() => {
+            hideNDALoadingModal();
+            showNotification('Failed to generate NDA - please check your connection', 'error');
+        }, 2000);
     }
 });
 
 // Display NDA result
-function displayNdaResult(content) {
+function displayNdaResult(content, params = null) {
     ndaContent.textContent = content;
     ndaResult.style.display = 'block';
     exportNdaBtn.disabled = false;
+    
+    // Store parameters for export
+    if (params) {
+        currentNDAParams = params;
+    }
     
     // Scroll to result
     ndaResult.scrollIntoView({ behavior: 'smooth' });
@@ -271,7 +377,9 @@ exportNdaBtn.addEventListener('click', async () => {
         return;
     }
     
-    showLoading(true);
+    // Show loading modal for export
+    showNDALoadingModal();
+    updateLoadingMessage('fas fa-file-word', 'Preparing document for download...', 50);
     
     try {
         const response = await fetch('/api/nda/export/', {
@@ -279,32 +387,47 @@ exportNdaBtn.addEventListener('click', async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nda_content: ndaContent.textContent })
+            body: JSON.stringify({ 
+                nda_content: ndaContent.textContent,
+                party_a: currentNDAParams?.party_a || 'Party A',
+                party_b: currentNDAParams?.party_b || 'Party B'
+            })
         });
         
         const data = await response.json();
         
-        if (response.ok) {
-            // Create and download file
-            const blob = new Blob([data.content], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = data.filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
+        if (response.ok && data.success) {
+            // Show success message
+            updateLoadingMessage('fas fa-check-circle', 'Document ready for download!', 100, 'success');
             
-            showNotification('NDA exported successfully', 'success');
+            setTimeout(() => {
+                hideNDALoadingModal();
+                
+                // Trigger download
+                const link = document.createElement('a');
+                link.href = data.download_url;
+                link.download = data.filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                showNotification('📄 Your NDA document has been prepared and downloaded successfully!', 'success');
+            }, 1500);
+            
         } else {
-            showNotification(data.error || 'Export failed', 'error');
+            updateLoadingMessage('fas fa-exclamation-triangle', 'Failed to prepare document', 0, 'error');
+            setTimeout(() => {
+                hideNDALoadingModal();
+                showNotification(data.error || 'Export failed', 'error');
+            }, 2000);
         }
     } catch (error) {
         console.error('Export error:', error);
-        showNotification('Export failed. Please try again.', 'error');
-    } finally {
-        showLoading(false);
+        updateLoadingMessage('fas fa-exclamation-triangle', 'Export failed', 0, 'error');
+        setTimeout(() => {
+            hideNDALoadingModal();
+            showNotification('Export failed. Please try again.', 'error');
+        }, 2000);
     }
 });
 
@@ -450,6 +573,12 @@ function showNotification(message, type = 'info') {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Clausemint app initialized');
     
+    // Initialize AI provider status
+    checkAIStatus();
+    
+    // Initialize jurisdictions dropdown
+    loadJurisdictions();
+    
     // Add notification styles
     const style = document.createElement('style');
     style.textContent = `
@@ -463,4 +592,160 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
-}); 
+});
+
+// AI Provider Management Functions
+async function checkAIStatus() {
+    try {
+        const response = await fetch('/api/ai/status/');
+        const data = await response.json();
+        
+        if (response.ok) {
+            currentAIProvider = data.current_provider;
+            updateAIProviderBadge(data.current_provider, data.connection_status);
+        }
+    } catch (error) {
+        console.error('Error checking AI status:', error);
+    }
+}
+
+function updateAIProviderBadge(provider, connectionStatus) {
+    const badge = document.getElementById('aiProviderBadge');
+    if (badge) {
+        const status = connectionStatus.status === 'connected' ? '🟢' : '🔴';
+        badge.innerHTML = `<i class="fas fa-robot"></i> ${status} ${provider.toUpperCase()}`;
+        
+        // Update badge color based on connection status
+        if (connectionStatus.status === 'connected') {
+            badge.style.background = 'rgba(16, 185, 129, 0.1)';
+            badge.style.color = '#10b981';
+            badge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+        } else {
+            badge.style.background = 'rgba(239, 68, 68, 0.1)';
+            badge.style.color = '#ef4444';
+            badge.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+        }
+    }
+}
+
+async function switchAIProvider(provider) {
+    try {
+        const response = await fetch('/api/ai/switch/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ provider: provider })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            currentAIProvider = provider;
+            updateAIProviderBadge(provider, data.connection_status);
+            showNotification(`Switched to ${provider.toUpperCase()}`, 'success');
+        } else {
+            showNotification(data.error || 'Failed to switch provider', 'error');
+        }
+    } catch (error) {
+        console.error('Error switching AI provider:', error);
+        showNotification('Failed to switch AI provider', 'error');
+    }
+}
+
+// Jurisdiction Management Functions
+async function loadJurisdictions() {
+    try {
+        const response = await fetch('/api/jurisdictions/');
+        const data = await response.json();
+        
+        if (response.ok) {
+            populateJurisdictionDropdown(data.jurisdictions, data.default);
+        } else {
+            console.error('Error loading jurisdictions:', data.error);
+        }
+    } catch (error) {
+        console.error('Error loading jurisdictions:', error);
+    }
+}
+
+function populateJurisdictionDropdown(jurisdictions, defaultJurisdiction) {
+    const select = document.getElementById('jurisdiction');
+    if (!select) return;
+    
+    // Clear existing options
+    select.innerHTML = '';
+    
+    // Add jurisdictions
+    jurisdictions.forEach(jurisdiction => {
+        const option = document.createElement('option');
+        option.value = jurisdiction;
+        option.textContent = jurisdiction;
+        
+        // Set default jurisdiction as selected
+        if (jurisdiction === defaultJurisdiction) {
+            option.selected = true;
+        }
+        
+        select.appendChild(option);
+    });
+}
+
+// NDA Loading Modal Functions
+function showNDALoadingModal() {
+    const modal = document.getElementById('ndaLoadingModal');
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+    
+    // Start cycling through messages
+    currentMessageIndex = 0;
+    updateLoadingMessage(
+        legalLoadingMessages[0].icon,
+        legalLoadingMessages[0].message,
+        legalLoadingMessages[0].progress
+    );
+    
+    messageInterval = setInterval(() => {
+        currentMessageIndex = (currentMessageIndex + 1) % legalLoadingMessages.length;
+        const message = legalLoadingMessages[currentMessageIndex];
+        updateLoadingMessage(message.icon, message.message, message.progress);
+    }, 3000); // Increased to 3 seconds for longer processing
+}
+
+function hideNDALoadingModal() {
+    const modal = document.getElementById('ndaLoadingModal');
+    const modalInstance = bootstrap.Modal.getInstance(modal);
+    if (modalInstance) {
+        modalInstance.hide();
+    }
+    
+    // Clear message interval
+    if (messageInterval) {
+        clearInterval(messageInterval);
+        messageInterval = null;
+    }
+}
+
+function updateLoadingMessage(icon, message, progress, status = '') {
+    const messageElement = document.getElementById('loadingMessage');
+    const progressElement = document.getElementById('loadingProgress');
+    
+    // Update icon and message
+    messageElement.innerHTML = `
+        <p class="mb-2"><i class="${icon} ${status === 'success' ? 'loading-success' : status === 'error' ? 'loading-error' : ''}"></i></p>
+        <p class="text-muted">${message}</p>
+    `;
+    
+    // Update progress
+    progressElement.style.width = `${progress}%`;
+    
+    // Update title based on status
+    const titleElement = document.getElementById('loadingTitle');
+    if (status === 'success') {
+        titleElement.textContent = 'Document Ready!';
+    } else if (status === 'error') {
+        titleElement.textContent = 'Generation Failed';
+    } else {
+        titleElement.textContent = 'Crafting Your Legal Document';
+    }
+} 

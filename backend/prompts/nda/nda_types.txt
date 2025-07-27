@@ -1,0 +1,86 @@
+## NDA Types and Specialized Requirements:
+
+### 1. MUTUAL NDA (Two-Way)
+- Both parties disclose confidential information
+- Equal obligations for both parties
+- Balanced protection and restrictions
+- Include provisions for joint development
+- Address ownership of jointly created IP
+
+### 2. UNILATERAL NDA (One-Way)
+- Only one party discloses confidential information
+- Recipient has primary obligations
+- Discloser has limited obligations
+- Focus on recipient's use restrictions
+- Clear definition of permitted use
+
+### 3. EMPLOYEE NDA
+- Employee-specific obligations
+- Post-employment restrictions
+- Non-compete considerations (if applicable)
+- Return of company materials
+- Ongoing confidentiality obligations
+- Clear definition of work product ownership
+
+### 4. VENDOR/SUPPLIER NDA
+- Vendor access to company information
+- Use restrictions for vendor services
+- Subcontractor limitations
+- Data security requirements
+- Service-specific confidentiality terms
+
+### 5. INVESTMENT NDA
+- Due diligence context
+- Financial information protection
+- Deal-specific confidentiality
+- Limited use for evaluation purposes
+- Return of materials if deal doesn't proceed
+
+### 6. JOINT VENTURE NDA
+- Collaborative development context
+- Shared IP considerations
+- Joint ownership provisions
+- Exit strategy considerations
+- Ongoing collaboration terms
+
+### 7. TECHNOLOGY/STARTUP NDA
+- IP-heavy focus
+- Development collaboration
+- Patent and trade secret protection
+- Innovation ownership
+- Future licensing considerations
+
+## Jurisdiction-Specific Considerations:
+
+### India (Common Law) - Default
+- Indian Contract Act, 1872 compliance
+- Information Technology Act, 2000 considerations
+- Personal Data Protection Bill requirements
+- Arbitration and Conciliation Act, 1996
+- Indian court jurisdiction and enforcement
+- Specific performance under Indian law
+- Limitation Act, 1963 considerations
+
+### US (Common Law)
+- State-specific variations
+- Trade secret protection
+- Injunctive relief provisions
+- Reasonable restrictions
+
+### EU (Civil Law)
+- GDPR compliance
+- Data protection requirements
+- Cross-border considerations
+- EU-specific remedies
+
+### UK (Common Law)
+- English law provisions
+- UK-specific IP protection
+- Brexit considerations
+- UK court jurisdiction
+
+### International
+- Choice of law provisions
+- Dispute resolution mechanisms
+- Cross-border enforcement
+- International arbitration clauses 

@@ -1,7 +1,7 @@
-# Clausemint - Setup Guide
+# Clausemint.com - Setup Guide
 
 ## Project Overview
-Clausemint is a Legal SaaS MVP that provides AI-powered legal document generation and analysis. The application features:
+Clausemint.com is a Legal SaaS MVP that provides AI-powered legal document generation and analysis. The application features:
 
 - **NDA Generator**: Create professional NDA agreements with AI assistance
 - **Document Review**: Analyze legal documents with Red-Amber-Green risk assessment
@@ -18,7 +18,8 @@ Clausemint is a Legal SaaS MVP that provides AI-powered legal document generatio
 
 ### 1. Prerequisites
 - Python 3.9+
-- OpenAI API Key
+- OpenAI API Key (optional, for fallback)
+- Local Mistral AI installation via Ollama (recommended for MVP)
 
 ### 2. Clone and Setup
 ```bash
@@ -47,8 +48,14 @@ SECRET_KEY=django-insecure-clausemint-dev-key-change-in-production
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 
-# OpenAI API Key (replace with your actual key)
+# AI Provider Configuration
+AI_PROVIDER=mistral  # Options: mistral, openai (default: mistral for MVP)
 OPENAI_API_KEY=your-openai-api-key-here
+MISTRAL_API_KEY=local  # Use 'local' for local Mistral installation
+MISTRAL_BASE_URL=http://localhost:11434  # Default Ollama URL
+
+# Default Jurisdiction
+DEFAULT_JURISDICTION=India  # Default jurisdiction for NDA generation
 ```
 
 ### 4. Database Setup
@@ -64,6 +71,30 @@ python manage.py runserver
 ```
 
 The application will be available at: http://localhost:8000
+
+## AI Provider Setup
+
+### Mistral AI (Default for MVP)
+1. Install Ollama: https://ollama.ai/
+2. Pull Mistral model: `ollama pull mistral`
+3. Start Ollama service: `ollama serve`
+4. The application will automatically connect to `http://localhost:11434`
+
+### OpenAI (Fallback)
+1. Get an OpenAI API key from https://platform.openai.com/
+2. Set `AI_PROVIDER=openai` in your `.env` file
+3. Add your OpenAI API key to the `.env` file
+
+### Switching AI Providers
+- The application defaults to Mistral AI for the MVP
+- You can switch providers via the API or by changing the `AI_PROVIDER` environment variable
+- The current provider is displayed in the sidebar with connection status
+
+### Jurisdictions
+- The application supports 20+ jurisdictions worldwide
+- India is set as the default jurisdiction for NDA generation
+- Jurisdictions include legal system information and specific considerations
+- Dropdown selection available in the NDA generator interface
 
 ## Features
 

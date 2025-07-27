@@ -1,0 +1,74 @@
+## NDA Clause Library
+
+### 1. DEFINITIONS SECTION
+
+#### Standard Confidential Information Definition:
+"Confidential Information" means any information disclosed by the Disclosing Party to the Receiving Party, either directly or indirectly, in writing, orally, or by inspection of tangible objects, which is designated as "Confidential," "Proprietary," or some similar designation, or that should reasonably be understood to be confidential given the nature of the information and the circumstances of disclosure.
+
+#### Enhanced Confidential Information Definition:
+"Confidential Information" includes, but is not limited to: (a) trade secrets, inventions, ideas, processes, computer source and object code, formulae, data, programs, other works of authorship, know-how, improvements, discoveries, developments, designs, and techniques; (b) information regarding plans for research, development, new products, marketing and selling, business plans, budgets and unpublished financial statements, licenses, prices and costs, suppliers and customers; and (c) information regarding the skills and compensation of employees and contractors of the Disclosing Party.
+
+### 2. CONFIDENTIALITY OBLIGATIONS
+
+#### Standard Non-Disclosure Obligation:
+The Receiving Party shall: (a) use the Confidential Information solely for the Purpose; (b) not disclose the Confidential Information to any third party without the prior written consent of the Disclosing Party; (c) limit access to the Confidential Information to those of its employees, agents, and representatives who have a need to know for the Purpose and who are bound by confidentiality obligations at least as restrictive as those contained herein; and (d) use the same degree of care to protect the confidentiality of the Confidential Information as it uses to protect its own confidential information of similar nature, but in no event less than reasonable care.
+
+#### Enhanced Protection Obligation:
+The Receiving Party shall maintain the Confidential Information in strict confidence and shall not, without the prior written consent of the Disclosing Party: (a) use, reproduce, distribute, or disclose the Confidential Information except as expressly permitted herein; (b) allow any third party to access, use, or benefit from the Confidential Information; (c) reverse engineer, disassemble, or decompile any Confidential Information that is software or firmware; or (d) remove or alter any proprietary notices or labels on the Confidential Information.
+
+### 3. PERMITTED DISCLOSURES
+
+#### Standard Permitted Disclosures:
+The Receiving Party may disclose Confidential Information to the extent required by law, regulation, or court order, provided that the Receiving Party: (a) gives the Disclosing Party prompt written notice of such requirement; (b) cooperates with the Disclosing Party in seeking a protective order or other appropriate remedy; and (c) discloses only that portion of the Confidential Information that is legally required to be disclosed.
+
+#### Enhanced Permitted Disclosures:
+Notwithstanding the foregoing, the Receiving Party may disclose Confidential Information: (a) to its legal counsel, accountants, and other professional advisors who are bound by confidentiality obligations; (b) to potential investors, acquirers, or lenders who are bound by confidentiality obligations at least as restrictive as those contained herein; (c) to the extent required by applicable law, regulation, or court order, provided that the Receiving Party gives the Disclosing Party prompt written notice and cooperates in seeking protective measures; and (d) to the extent that such information becomes publicly available through no fault of the Receiving Party.
+
+### 4. TERM AND TERMINATION
+
+#### Standard Term:
+This Agreement shall commence on the Effective Date and shall remain in effect for a period of [CONFIDENTIALITY_PERIOD] years, unless earlier terminated by either party upon thirty (30) days' written notice to the other party.
+
+#### Enhanced Term with Survival:
+This Agreement shall commence on the Effective Date and shall remain in effect for a period of [CONFIDENTIALITY_PERIOD] years. Notwithstanding the foregoing, the obligations of confidentiality and non-use shall survive termination of this Agreement for a period of [CONFIDENTIALITY_PERIOD] years with respect to trade secrets and for a period of [CONFIDENTIALITY_PERIOD] years with respect to all other Confidential Information.
+
+### 5. RETURN OF MATERIALS
+
+#### Standard Return Obligation:
+Upon termination of this Agreement or upon the written request of the Disclosing Party, the Receiving Party shall promptly return to the Disclosing Party all copies of the Confidential Information in tangible form, or destroy all such copies and certify in writing to the Disclosing Party that such Confidential Information has been destroyed.
+
+#### Enhanced Return Obligation:
+Upon termination of this Agreement or upon the written request of the Disclosing Party, the Receiving Party shall: (a) promptly return to the Disclosing Party all copies of the Confidential Information in tangible form; (b) destroy all electronic copies of the Confidential Information and certify in writing to the Disclosing Party that such destruction has been completed; (c) ensure that all employees, agents, and representatives who had access to the Confidential Information return or destroy their copies; and (d) provide a written certification that all Confidential Information has been returned or destroyed.
+
+### 6. REMEDIES AND ENFORCEMENT
+
+#### Standard Remedies:
+The Receiving Party acknowledges that the unauthorized disclosure or use of the Confidential Information would cause irreparable harm to the Disclosing Party for which monetary damages would be inadequate. Therefore, the Disclosing Party shall be entitled to seek injunctive relief in addition to any other remedies available at law or in equity.
+
+#### Enhanced Remedies:
+The Receiving Party acknowledges that the unauthorized disclosure or use of the Confidential Information would cause irreparable harm to the Disclosing Party for which monetary damages would be inadequate. Therefore, the Disclosing Party shall be entitled to seek injunctive relief, specific performance, and any other equitable remedies available at law or in equity. In addition, the Receiving Party shall be liable for all damages, including but not limited to actual damages, lost profits, and attorneys' fees, resulting from any breach of this Agreement.
+
+### 7. GENERAL PROVISIONS
+
+#### Standard General Provisions:
+This Agreement constitutes the entire agreement between the parties concerning the subject matter hereof and supersedes all prior agreements, whether written or oral. This Agreement may not be modified except by a written instrument signed by both parties. This Agreement shall be governed by and construed in accordance with the laws of [JURISDICTION]. Any dispute arising out of or relating to this Agreement shall be resolved in the courts of [JURISDICTION].
+
+#### Enhanced General Provisions:
+This Agreement constitutes the entire agreement between the parties concerning the subject matter hereof and supersedes all prior agreements, whether written or oral. This Agreement may not be modified except by a written instrument signed by both parties. This Agreement shall be governed by and construed in accordance with the laws of [JURISDICTION]. Any dispute arising out of or relating to this Agreement shall be resolved through binding arbitration in [JURISDICTION] in accordance with the rules of [ARBITRATION_BODY]. The prevailing party in any legal proceeding shall be entitled to recover its reasonable attorneys' fees and costs. If any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.
+
+### 8. INDIA-SPECIFIC CLAUSES
+
+#### Indian Contract Act Compliance:
+This Agreement is made in accordance with the Indian Contract Act, 1872, and all provisions shall be interpreted and enforced in accordance with Indian law. The parties acknowledge that this Agreement constitutes a valid and enforceable contract under Indian law.
+
+#### Information Technology Act Compliance:
+The parties acknowledge and agree to comply with the provisions of the Information Technology Act, 2000, as amended from time to time, including but not limited to provisions relating to electronic records, digital signatures, and data protection.
+
+#### Arbitration Clause (Indian):
+Any dispute, controversy, or claim arising out of or relating to this Agreement, or the breach, termination, or invalidity thereof, shall be settled by arbitration in accordance with the Arbitration and Conciliation Act, 1996. The arbitration shall be conducted by a sole arbitrator appointed by mutual agreement of the parties, or in the absence of such agreement, by the [CITY] High Court. The seat of arbitration shall be [CITY], India, and the proceedings shall be conducted in English.
+
+#### Limitation of Liability (Indian):
+Notwithstanding anything to the contrary contained herein, the liability of either party under this Agreement shall be limited to the extent permitted under the Indian Contract Act, 1872, and the Limitation Act, 1963. No party shall be liable for any indirect, consequential, or punitive damages except as expressly provided herein.
+
+#### Governing Law and Jurisdiction (Indian):
+This Agreement shall be governed by and construed in accordance with the laws of India. The courts in [CITY], India shall have exclusive jurisdiction over any disputes arising out of or relating to this Agreement, subject to the arbitration clause contained herein. 

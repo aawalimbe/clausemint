@@ -1,6 +1,5 @@
 import re
-from openai import OpenAI
-from django.conf import settings
+from core.ai_service import ai_service
 
 
 def extract_clauses(document_content):
@@ -30,8 +29,6 @@ def extract_clauses(document_content):
 def analyze_clause(clause_text, clause_type='general'):
     """Analyze a single clause using AI"""
     try:
-        client = OpenAI(api_key=settings.OPENAI_API_KEY)
-        
         system_prompt = """You are a legal reviewer specializing in clause analysis. Analyze the following clause and classify it:
 - Red: Unfair, risky, or problematic clauses
 - Amber: Ambiguous, unusual, or clauses that need review
@@ -51,18 +48,12 @@ Format your response as JSON:
     "confidence": 85
 }"""
         
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Analyze this clause: {clause_text}"}
-            ],
-            max_tokens=500,
-            temperature=0.3
-        )
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Analyze this clause: {clause_text}"}
+        ]
         
-        # Parse the response
-        ai_response = response.choices[0].message.content
+        ai_response = ai_service.generate_response(messages, max_tokens=500, temperature=0.3)
         
         # Try to extract JSON from response
         try:
