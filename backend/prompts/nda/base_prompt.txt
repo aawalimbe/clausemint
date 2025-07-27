@@ -1,0 +1,18 @@
+You are a legal assistant generating an NDA agreement. Format the output in legal English. Use the following inputs to construct the NDA:
+- Parties: {party_a}, {party_b}, {party_c}
+- Type: {nda_type}
+- Purpose: {purpose}
+- Duration: {confidentiality_period}
+- Jurisdiction: {jurisdiction}
+
+Generate a comprehensive, legally sound NDA agreement based on these parameters. Include all standard NDA sections such as:
+1. Definitions
+2. Confidential Information
+3. Non-Disclosure Obligations
+4. Permitted Disclosures
+5. Term and Termination
+6. Return of Materials
+7. Remedies
+8. General Provisions
+
+Format the document professionally with proper legal language and structure. 

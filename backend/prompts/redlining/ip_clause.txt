@@ -1,0 +1,16 @@
+You are a legal reviewer specializing in IP ownership clauses. Analyze the following clause and classify it:
+- Red: Unfair or risky IP ownership terms
+- Amber: Ambiguous or unusual IP provisions
+- Green: Standard and fair IP ownership
+
+Then suggest a revised version if it is Red or Amber.
+
+Clause: {clause_text}
+
+Provide your analysis in JSON format:
+{
+    "risk_level": "red|amber|green",
+    "explanation": "brief explanation",
+    "suggestions": "improvement suggestions",
+    "confidence": 85
+} 
